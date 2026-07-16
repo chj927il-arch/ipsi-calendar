@@ -1,6 +1,46 @@
 {
-  "updatedAt": "2026-07-16T05:30:30.398Z",
+  "updatedAt": "2026-07-16T05:41:12.255Z",
   "events": [
+    {
+      "id": "11c5df4daf86",
+      "category": "행사",
+      "title": "2027학년도 화성의과학대학교 찾아가는 입학설명회",
+      "startDate": "2026-05-11",
+      "endDate": "2026-08-28",
+      "note": "",
+      "firstSeenAt": "2026-07-16T05:41:12.254Z",
+      "lastChangedAt": "2026-07-16T05:41:12.254Z"
+    },
+    {
+      "id": "d8cff0fc42a2",
+      "category": "행사",
+      "title": "2027학년도 수시모집 논술전형 대비 온라인 모의논술고사 시행 안내",
+      "startDate": "2026-07-10",
+      "endDate": "2026-07-13",
+      "note": "",
+      "firstSeenAt": "2026-07-16T05:41:12.254Z",
+      "lastChangedAt": "2026-07-16T05:41:12.254Z"
+    },
+    {
+      "id": "f8130877c0d8",
+      "category": "행사",
+      "title": "온라인 모의논술고사",
+      "startDate": "2026-07-10",
+      "endDate": "2026-07-13",
+      "note": "",
+      "firstSeenAt": "2026-07-16T05:41:12.254Z",
+      "lastChangedAt": "2026-07-16T05:41:12.254Z"
+    },
+    {
+      "id": "73ac00446cc0",
+      "category": "박람회",
+      "title": "2027학년도 수시 대학입학정보박람회 1:1 대입상담",
+      "startDate": "2026-07-23",
+      "endDate": "2026-07-25",
+      "note": "",
+      "firstSeenAt": "2026-07-16T05:41:12.254Z",
+      "lastChangedAt": "2026-07-16T05:41:12.254Z"
+    },
     {
       "id": "fff04ecf00dc",
       "category": "수시",

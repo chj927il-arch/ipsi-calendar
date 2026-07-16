@@ -1,10 +1,7 @@
-name: 입시일정 자동 갱신 + 알림 발송 (매일)
+name: 입시일정 갱신 + 알림 발송 (수동 실행)
 
-# 매일 한국시간 오전 7시 13분(=UTC 전날 22:13) 자동 실행 + 수동 실행도 가능
-# 정각(:00)은 크론이 몰려 지연되기 쉬워 :13으로 살짝 비켜 설정
+# 자동 매일 크론은 사용하지 않음 — 필요할 때 Actions 탭에서 수동으로(workflow_dispatch) 실행
 on:
-  schedule:
-    - cron: '13 22 * * *'
   workflow_dispatch: {}
 
 permissions:

@@ -21,6 +21,8 @@
     --amber: #fbbf24; --amber-soft: rgba(251,191,36,.15);
     --emerald: #34d399; --emerald-soft: rgba(52,211,153,.15);
     --rose: #fb7185; --rose-soft: rgba(251,113,133,.15);
+    --sky: #38bdf8; --sky-soft: rgba(56,189,248,.15);
+    --slate: #94a3b8; --slate-soft: rgba(148,163,184,.15);
     --shadow: 0 24px 60px -18px rgba(0,0,0,.7);
     --card-shadow: 0 1px 0 rgba(255,255,255,.04) inset, 0 18px 40px -22px rgba(0,0,0,.8);
     --glow: radial-gradient(900px 520px at 75% -8%, rgba(124,126,248,.18), transparent 60%), radial-gradient(720px 440px at 8% 4%, rgba(192,132,252,.10), transparent 55%);
@@ -37,6 +39,8 @@
       --amber: #c2740a; --amber-soft: rgba(194,116,10,.10);
       --emerald: #047857; --emerald-soft: rgba(4,120,87,.10);
       --rose: #e11d48; --rose-soft: rgba(225,29,72,.09);
+      --sky: #0369a1; --sky-soft: rgba(3,105,161,.10);
+      --slate: #475569; --slate-soft: rgba(71,85,105,.10);
       --shadow: 0 24px 60px -22px rgba(20,30,70,.22);
       --card-shadow: 0 1px 2px rgba(20,30,70,.05), 0 16px 36px -24px rgba(20,30,70,.22);
       --glow: radial-gradient(900px 520px at 78% -10%, rgba(91,91,214,.10), transparent 60%);
@@ -94,7 +98,9 @@
   .cat-suSi { background: var(--accent-soft); color: var(--accent-2); }
   .cat-jeongSi { background: var(--amber-soft); color: var(--amber); }
   .cat-chuga { background: var(--emerald-soft); color: var(--emerald); }
-  .cat-etc { background: var(--rose-soft); color: var(--rose); }
+  .cat-haengsa { background: var(--sky-soft); color: var(--sky); }
+  .cat-bakram { background: var(--rose-soft); color: var(--rose); }
+  .cat-etc { background: var(--slate-soft); color: var(--slate); }
 
   .legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--hair); font-size: 12px; color: var(--text-2); }
   .legend span { display: inline-flex; align-items: center; gap: 6px; }
@@ -161,7 +167,9 @@
           <span><i style="background:var(--accent-2)"></i>수시</span>
           <span><i style="background:var(--amber)"></i>정시</span>
           <span><i style="background:var(--emerald)"></i>추가모집</span>
-          <span><i style="background:var(--rose)"></i>기타</span>
+          <span><i style="background:var(--sky)"></i>대학별 행사</span>
+          <span><i style="background:var(--rose)"></i>박람회/설명회</span>
+          <span><i style="background:var(--slate)"></i>기타</span>
         </div>
       </div>
 
@@ -198,13 +206,15 @@
 
 <script>
 const DOW = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
-const CATEGORY_CLASS = { '수시': 'cat-suSi', '정시': 'cat-jeongSi', '추가': 'cat-chuga' };
+const CATEGORY_CLASS = { '수시': 'cat-suSi', '정시': 'cat-jeongSi', '추가': 'cat-chuga', '행사': 'cat-haengsa', '박람회': 'cat-bakram' };
 function categoryClass(cat) { return CATEGORY_CLASS[cat] || 'cat-etc'; }
 function categoryColorVar(cat) {
   if (cat === '수시') return 'var(--accent-2)';
   if (cat === '정시') return 'var(--amber)';
   if (cat === '추가') return 'var(--emerald)';
-  return 'var(--rose)';
+  if (cat === '행사') return 'var(--sky)';
+  if (cat === '박람회') return 'var(--rose)';
+  return 'var(--slate)';
 }
 
 function todayStr() {

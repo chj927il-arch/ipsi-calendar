@@ -4,10 +4,9 @@ module.exports = {
     baseUrl: 'https://www.adiga.kr',
     viewPath: '/uct/cas/scheduleView.do?menuId=PCUCTCAS1000',
     ajaxPath: '/uct/cas/scheduleAjax.do',
-    // 01=수시(ATR), 02=정시(FTR, 수능시험일 포함) — 실측 결과 이 둘이 핵심 "대입일정".
-    // (UI의 '대학별 행사안내'/'대입 박람회·설명회' 체크박스는 searchScheduleType이 아닌
-    //  별도 지역필터로 동작하는 것으로 보여 이번 범위에서는 제외)
-    searchScheduleType: '01,02',
+    // 01=수시(ATR), 02=정시(FTR, 수능시험일 포함), 03=대학별 행사안내(PGM), 04=대입 박람회/설명회(EXPO)
+    // — adiga.kr 화면의 체크박스 3개(대입일정/대학별 행사안내/대입 박람회·설명회)가 그대로 이 4개 코드에 대응.
+    searchScheduleType: '01,02,03,04',
     // 크롤 시점 기준 월 범위. 수시(9~12월)·정시(1~2월)·수능(11월) 등 한 입시 주기를 커버
     monthsBefore: 1,
     monthsAfter: 14,
