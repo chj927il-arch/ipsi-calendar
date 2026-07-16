@@ -1,0 +1,17 @@
+{
+  "name": "ipsi-calendar",
+  "version": "1.0.0",
+  "private": true,
+  "description": "대학어디가 대입일정 캘린더 대시보드 + 웹 푸시 알림",
+  "main": "crawl.js",
+  "scripts": {
+    "start": "node server.js",
+    "crawl": "node crawl.js",
+    "notify": "node scripts/notify.js",
+    "vapid": "node scripts/generate-vapid-keys.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "web-push": "^3.6.7"
+  }
+}

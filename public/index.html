@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>입시일정캘린더 — 대입일정 대시보드</title>
+<meta name="theme-color" content="#07080c">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root {
+    --font: 'Pretendard','Pretendard Variable','Apple SD Gothic Neo',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --radius: 18px; --radius-sm: 12px; --radius-xs: 9px;
+    --bg: #07080c; --bg-2: #0a0b11;
+    --glass: rgba(255,255,255,.035); --glass-strong: rgba(255,255,255,.055);
+    --hair: rgba(255,255,255,.08); --hair-strong: rgba(255,255,255,.14);
+    --text: #f3f5fb; --text-2: #b9c0d4; --muted: #767e96; --faint: #525a72;
+    --accent: #8b8cf9; --accent-2: #c084fc;
+    --accent-grad: linear-gradient(135deg,#7c7ef8,#c084fc);
+    --accent-soft: rgba(124,126,248,.14);
+    --amber: #fbbf24; --amber-soft: rgba(251,191,36,.15);
+    --emerald: #34d399; --emerald-soft: rgba(52,211,153,.15);
+    --rose: #fb7185; --rose-soft: rgba(251,113,133,.15);
+    --shadow: 0 24px 60px -18px rgba(0,0,0,.7);
+    --card-shadow: 0 1px 0 rgba(255,255,255,.04) inset, 0 18px 40px -22px rgba(0,0,0,.8);
+    --glow: radial-gradient(900px 520px at 75% -8%, rgba(124,126,248,.18), transparent 60%), radial-gradient(720px 440px at 8% 4%, rgba(192,132,252,.10), transparent 55%);
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f4f5f9; --bg-2: #eef0f6;
+      --glass: rgba(255,255,255,.75); --glass-strong: #ffffff;
+      --hair: rgba(15,20,40,.09); --hair-strong: rgba(15,20,40,.16);
+      --text: #11142a; --text-2: #3a425e; --muted: #6b7488; --faint: #97a0b8;
+      --accent: #5b5bd6; --accent-2: #9333ea;
+      --accent-grad: linear-gradient(135deg,#5b5bd6,#9333ea);
+      --accent-soft: rgba(91,91,214,.10);
+      --amber: #c2740a; --amber-soft: rgba(194,116,10,.10);
+      --emerald: #047857; --emerald-soft: rgba(4,120,87,.10);
+      --rose: #e11d48; --rose-soft: rgba(225,29,72,.09);
+      --shadow: 0 24px 60px -22px rgba(20,30,70,.22);
+      --card-shadow: 0 1px 2px rgba(20,30,70,.05), 0 16px 36px -24px rgba(20,30,70,.22);
+      --glow: radial-gradient(900px 520px at 78% -10%, rgba(91,91,214,.10), transparent 60%);
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { min-height: 100%; }
+  body {
+    background: var(--bg); color: var(--text); font-family: var(--font);
+    font-size: 16px; line-height: 1.6; letter-spacing: -.003em;
+    -webkit-font-smoothing: antialiased;
+  }
+  body::before { content: ''; position: fixed; inset: 0; z-index: -1; background: var(--glow); }
+  .num { font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 32px 24px 60px; }
+
+  header.top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 26px; }
+  .brand-title { font-size: 26px; font-weight: 800; letter-spacing: -.03em; }
+  .brand-sub { font-size: 13px; color: var(--muted); margin-top: 6px; }
+  .top-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+  .btn { padding: 9px 15px; border-radius: var(--radius-xs); border: 1px solid var(--hair-strong); background: var(--glass); color: var(--text-2); font-family: var(--font); font-size: 13.5px; font-weight: 650; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; transition: all .16s; }
+  .btn:hover { border-color: var(--accent); color: var(--text); background: var(--glass-strong); }
+  .btn:active { transform: scale(.97); }
+  .btn:disabled { opacity: .45; cursor: not-allowed; }
+  .btn-primary { background: var(--accent-grad); border-color: transparent; color: #fff; box-shadow: 0 10px 24px -10px var(--accent); }
+  .btn-primary:hover { color: #fff; filter: brightness(1.08); }
+
+  .grid { display: grid; grid-template-columns: 1fr 340px; gap: 22px; align-items: start; }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+
+  .card { background: linear-gradient(180deg, var(--glass-strong), var(--glass)); border: 1px solid var(--hair); border-radius: var(--radius); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: var(--card-shadow); padding: 22px; }
+  .card + .card { margin-top: 18px; }
+
+  .cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+  .cal-nav { display: flex; align-items: center; gap: 8px; }
+  .cal-title { font-size: 19px; font-weight: 750; letter-spacing: -.02em; min-width: 108px; text-align: center; }
+  .icon-btn { width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--hair-strong); background: var(--glass); color: var(--text-2); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; font-size: 16px; }
+  .icon-btn:hover { color: var(--text); border-color: var(--accent); }
+
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+  .cal-dow { text-align: center; font-size: 11.5px; font-weight: 700; color: var(--faint); letter-spacing: .04em; padding-bottom: 8px; }
+  .cal-cell { min-height: 84px; border-radius: var(--radius-xs); border: 1px solid transparent; padding: 7px 6px; cursor: pointer; transition: all .14s; display: flex; flex-direction: column; gap: 4px; }
+  .cal-cell:hover { background: var(--glass-strong); border-color: var(--hair); }
+  .cal-cell.out { opacity: .3; cursor: default; }
+  .cal-cell.out:hover { background: transparent; border-color: transparent; }
+  .cal-cell.today { border-color: var(--accent); background: var(--accent-soft); }
+  .cal-cell.selected { border-color: var(--accent-2); background: var(--accent-soft); }
+  .cal-date { font-size: 13px; font-weight: 650; }
+  .cal-pills { display: flex; flex-direction: column; gap: 3px; }
+  .pill { font-size: 10.5px; font-weight: 650; padding: 2px 6px; border-radius: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pill-more { font-size: 10px; color: var(--faint); font-weight: 650; }
+
+  .cat-suSi { background: var(--accent-soft); color: var(--accent-2); }
+  .cat-jeongSi { background: var(--amber-soft); color: var(--amber); }
+  .cat-chuga { background: var(--emerald-soft); color: var(--emerald); }
+  .cat-etc { background: var(--rose-soft); color: var(--rose); }
+
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--hair); font-size: 12px; color: var(--text-2); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+
+  .section-title { font-size: 14.5px; font-weight: 750; margin-bottom: 12px; letter-spacing: -.01em; }
+
+  .day-detail-list { display: flex; flex-direction: column; gap: 10px; }
+  .event-row { display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px; border-radius: var(--radius-xs); background: var(--glass); border: 1px solid var(--hair); }
+  .event-row .dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
+  .event-title { font-size: 14px; font-weight: 650; }
+  .event-period { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .event-note { font-size: 12px; color: var(--text-2); margin-top: 4px; }
+  .empty-note { font-size: 13px; color: var(--faint); padding: 6px 2px; }
+
+  .upcoming-item { display: flex; align-items: center; gap: 10px; padding: 11px 4px; border-bottom: 1px solid var(--hair); }
+  .upcoming-item:last-child { border-bottom: none; }
+  .dday { flex-shrink: 0; min-width: 52px; text-align: center; font-size: 12px; font-weight: 800; padding: 5px 0; border-radius: 8px; background: var(--accent-soft); color: var(--accent-2); }
+  .dday.today { background: var(--rose-soft); color: var(--rose); }
+  .upcoming-main { min-width: 0; flex: 1; }
+  .upcoming-title { font-size: 13.5px; font-weight: 650; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .upcoming-period { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+
+  .push-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+  .push-status { font-size: 12.5px; color: var(--muted); }
+  .offsets { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+  .offset-chip { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 600; padding: 6px 11px; border-radius: 20px; border: 1px solid var(--hair-strong); background: var(--glass); cursor: pointer; color: var(--text-2); user-select: none; }
+  .offset-chip.on { background: var(--accent-soft); border-color: var(--accent); color: var(--text); }
+  .push-hint { font-size: 11.5px; color: var(--faint); line-height: 1.55; }
+  .push-msg { font-size: 12px; margin-top: 10px; min-height: 16px; }
+  .push-msg.ok { color: var(--emerald); }
+  .push-msg.err { color: var(--rose); }
+
+  footer.foot { margin-top: 30px; font-size: 12px; color: var(--faint); text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="brand-title">입시일정캘린더</div>
+      <div class="brand-sub" id="updatedAt">대학어디가(adiga.kr) 대입일정을 자동으로 모아 보여줍니다.</div>
+    </div>
+    <div class="top-actions">
+      <button class="btn" id="refreshBtn" style="display:none">지금 새로고침</button>
+      <button class="btn btn-primary" id="notifyToggleBtn">🔔 알림 설정</button>
+    </div>
+  </header>
+
+  <div class="grid">
+    <div class="left">
+      <div class="card">
+        <div class="cal-head">
+          <div class="cal-nav">
+            <button class="icon-btn" id="prevMonth">‹</button>
+            <div class="cal-title" id="calTitle">-</div>
+            <button class="icon-btn" id="nextMonth">›</button>
+          </div>
+          <button class="btn" id="todayBtn">오늘</button>
+        </div>
+        <div class="cal-grid" id="calDow"></div>
+        <div class="cal-grid" id="calGrid" style="margin-top:6px"></div>
+        <div class="legend">
+          <span><i style="background:var(--accent-2)"></i>수시</span>
+          <span><i style="background:var(--amber)"></i>정시</span>
+          <span><i style="background:var(--emerald)"></i>추가모집</span>
+          <span><i style="background:var(--rose)"></i>기타</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-title" id="dayDetailTitle">날짜를 선택하면 해당일 일정이 표시됩니다</div>
+        <div class="day-detail-list" id="dayDetail"></div>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="card">
+        <div class="section-title">다가오는 일정</div>
+        <div id="upcomingList"></div>
+      </div>
+
+      <div class="card" id="notifyPanel" style="display:none">
+        <div class="section-title">푸시 알림 설정</div>
+        <div class="push-row">
+          <div class="push-status" id="pushStatus">알림 꺼짐</div>
+          <button class="btn btn-primary" id="pushSubscribeBtn">알림 켜기</button>
+        </div>
+        <div class="offsets" id="offsetChips"></div>
+        <div class="push-hint">
+          일정 시작일 기준 며칠 전에 알림을 받을지 선택하세요. 브라우저(또는 앱)가 실행 중이어야 알림을 받을 수 있습니다.
+          iOS Safari는 이 페이지를 홈 화면에 추가한 뒤에만 알림이 동작합니다.
+        </div>
+        <div class="push-msg" id="pushMsg"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="foot">데이터 출처: 대학어디가(adiga.kr) 대입일정 · 매일 자동 갱신</footer>
+</div>
+
+<script>
+const DOW = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+const CATEGORY_CLASS = { '수시': 'cat-suSi', '정시': 'cat-jeongSi', '추가': 'cat-chuga' };
+function categoryClass(cat) { return CATEGORY_CLASS[cat] || 'cat-etc'; }
+function categoryColorVar(cat) {
+  if (cat === '수시') return 'var(--accent-2)';
+  if (cat === '정시') return 'var(--amber)';
+  if (cat === '추가') return 'var(--emerald)';
+  return 'var(--rose)';
+}
+
+function todayStr() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function fmtDate(dateStr) {
+  const [y,m,d] = dateStr.split('-');
+  return `${y}.${m}.${d}`;
+}
+function fmtPeriod(ev) {
+  return ev.startDate === ev.endDate ? fmtDate(ev.startDate) : `${fmtDate(ev.startDate)} ~ ${fmtDate(ev.endDate)}`;
+}
+function ddayLabel(dateStr) {
+  const diff = Math.round((new Date(dateStr) - new Date(todayStr())) / 86400000);
+  if (diff === 0) return 'D-DAY';
+  if (diff > 0) return `D-${diff}`;
+  return `D+${-diff}`;
+}
+
+const state = { events: [], year: new Date().getFullYear(), month: new Date().getMonth() + 1, selectedDate: null };
+
+async function loadSchedule() {
+  try {
+    const res = await fetch('./data/schedule.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error(String(res.status));
+    const data = await res.json();
+    state.events = Array.isArray(data.events) ? data.events : [];
+    if (data.updatedAt) {
+      const d = new Date(data.updatedAt);
+      document.getElementById('updatedAt').textContent = `마지막 업데이트: ${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+    }
+  } catch (e) {
+    document.getElementById('updatedAt').textContent = '일정 데이터를 아직 불러오지 못했습니다. crawl을 먼저 실행해주세요.';
+  }
+}
+
+function eventsOnDate(dateStr) {
+  return state.events.filter((e) => e.startDate <= dateStr && dateStr <= e.endDate);
+}
+
+function renderDow() {
+  document.getElementById('calDow').innerHTML = DOW.map((d) => `<div class="cal-dow">${d}</div>`).join('');
+}
+
+function renderCalendar() {
+  document.getElementById('calTitle').textContent = `${state.year}년 ${state.month}월`;
+  const first = new Date(state.year, state.month - 1, 1);
+  const startOffset = first.getDay();
+  const daysInMonth = new Date(state.year, state.month, 0).getDate();
+  const daysInPrevMonth = new Date(state.year, state.month - 1, 0).getDate();
+  const cells = [];
+  for (let i = 0; i < startOffset; i++) {
+    cells.push({ day: daysInPrevMonth - startOffset + 1 + i, out: true });
+  }
+  for (let d = 1; d <= daysInMonth; d++) {
+    cells.push({ day: d, out: false, dateStr: `${state.year}-${String(state.month).padStart(2,'0')}-${String(d).padStart(2,'0')}` });
+  }
+  while (cells.length % 7 !== 0) {
+    cells.push({ day: cells.length - startOffset - daysInMonth + 1, out: true });
+  }
+
+  const today = todayStr();
+  document.getElementById('calGrid').innerHTML = cells.map((c) => {
+    if (c.out) return `<div class="cal-cell out"><div class="cal-date">${c.day}</div></div>`;
+    const evs = eventsOnDate(c.dateStr);
+    const isToday = c.dateStr === today;
+    const isSelected = c.dateStr === state.selectedDate;
+    const pills = evs.slice(0, 3).map((e) => `<div class="pill ${categoryClass(e.category)}">${e.title}</div>`).join('');
+    const more = evs.length > 3 ? `<div class="pill-more">+${evs.length - 3}개</div>` : '';
+    return `<div class="cal-cell${isToday ? ' today' : ''}${isSelected ? ' selected' : ''}" data-date="${c.dateStr}">
+      <div class="cal-date">${c.day}</div>
+      <div class="cal-pills">${pills}${more}</div>
+    </div>`;
+  }).join('');
+
+  document.querySelectorAll('.cal-cell[data-date]').forEach((el) => {
+    el.addEventListener('click', () => {
+      state.selectedDate = el.getAttribute('data-date');
+      renderCalendar();
+      renderDayDetail();
+    });
+  });
+}
+
+function renderDayDetail() {
+  const title = document.getElementById('dayDetailTitle');
+  const box = document.getElementById('dayDetail');
+  if (!state.selectedDate) {
+    title.textContent = '날짜를 선택하면 해당일 일정이 표시됩니다';
+    box.innerHTML = '';
+    return;
+  }
+  title.textContent = `${fmtDate(state.selectedDate)} 일정`;
+  const evs = eventsOnDate(state.selectedDate);
+  if (!evs.length) {
+    box.innerHTML = '<div class="empty-note">이 날짜에는 등록된 일정이 없어요.</div>';
+    return;
+  }
+  box.innerHTML = evs.map((e) => `
+    <div class="event-row">
+      <div class="dot" style="background:${categoryColorVar(e.category)}"></div>
+      <div>
+        <div class="event-title">${e.title}</div>
+        <div class="event-period">${fmtPeriod(e)}</div>
+        ${e.note ? `<div class="event-note">${e.note}</div>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderUpcoming() {
+  const today = todayStr();
+  const upcoming = state.events
+    .filter((e) => e.startDate >= today)
+    .sort((a, b) => a.startDate.localeCompare(b.startDate))
+    .slice(0, 8);
+  const box = document.getElementById('upcomingList');
+  if (!upcoming.length) {
+    box.innerHTML = '<div class="empty-note">예정된 일정이 없어요.</div>';
+    return;
+  }
+  box.innerHTML = upcoming.map((e) => `
+    <div class="upcoming-item">
+      <div class="dday${e.startDate === today ? ' today' : ''}">${ddayLabel(e.startDate)}</div>
+      <div class="upcoming-main">
+        <div class="upcoming-title">${e.title}</div>
+        <div class="upcoming-period">${fmtPeriod(e)}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderAll() {
+  renderCalendar();
+  renderDayDetail();
+  renderUpcoming();
+}
+
+document.getElementById('prevMonth').addEventListener('click', () => {
+  state.month -= 1;
+  if (state.month < 1) { state.month = 12; state.year -= 1; }
+  renderCalendar();
+});
+document.getElementById('nextMonth').addEventListener('click', () => {
+  state.month += 1;
+  if (state.month > 12) { state.month = 1; state.year += 1; }
+  renderCalendar();
+});
+document.getElementById('todayBtn').addEventListener('click', () => {
+  const now = new Date();
+  state.year = now.getFullYear();
+  state.month = now.getMonth() + 1;
+  state.selectedDate = todayStr();
+  renderCalendar();
+  renderDayDetail();
+});
+
+// 로컬 개발 서버(server.js)에서만 /api/run이 존재 → "지금 새로고침" 버튼은 로컬에서만 노출
+const refreshBtn = document.getElementById('refreshBtn');
+fetch('/api/run', { method: 'OPTIONS' })
+  .then((res) => { if (res.ok) refreshBtn.style.display = ''; })
+  .catch(() => {});
+
+refreshBtn.addEventListener('click', async () => {
+  refreshBtn.disabled = true;
+  refreshBtn.textContent = '크롤링 중...';
+  try {
+    const res = await fetch('/api/run', { method: 'POST' });
+    const data = await res.json();
+    if (data.ok) {
+      await loadSchedule();
+      renderAll();
+      refreshBtn.textContent = '완료!';
+    } else {
+      refreshBtn.textContent = '실패 (콘솔 확인)';
+    }
+  } catch (e) {
+    refreshBtn.textContent = '실패';
+  }
+  setTimeout(() => { refreshBtn.disabled = false; refreshBtn.textContent = '지금 새로고침'; }, 2000);
+});
+
+(async () => {
+  await loadSchedule();
+  state.selectedDate = todayStr();
+  renderAll();
+})();
+</script>
+<script src="./push.js"></script>
+</body>
+</html>

@@ -1,0 +1,345 @@
+{
+  "updatedAt": "2026-07-16T04:56:05.047Z",
+  "events": [
+    {
+      "id": "fff04ecf00dc",
+      "category": "수시",
+      "title": "[수시]원서접수",
+      "startDate": "2026-09-07",
+      "endDate": "2026-09-11",
+      "note": "(중 3일 이상)",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "2fbccdc786eb",
+      "category": "수시",
+      "title": "[수시](전문대)1차원서접수",
+      "startDate": "2026-09-07",
+      "endDate": "2026-09-30",
+      "note": "",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "4e69f2744916",
+      "category": "수시",
+      "title": "[수시]모집전형",
+      "startDate": "2026-09-12",
+      "endDate": "2026-12-17",
+      "note": "",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "01e2840b8aba",
+      "category": "수시",
+      "title": "[수시](전문대)1차모집",
+      "startDate": "2026-09-12",
+      "endDate": "2026-12-19",
+      "note": "",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "8f1011c13f29",
+      "category": "수시",
+      "title": "[수시](전문대)2차모집",
+      "startDate": "2026-10-01",
+      "endDate": "2026-12-19",
+      "note": "",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "0495f456e82d",
+      "category": "수시",
+      "title": "[수시](전문대)2차원서접수",
+      "startDate": "2026-11-11",
+      "endDate": "2026-11-25",
+      "note": "",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "39812e444b39",
+      "category": "정시",
+      "title": "[정시]수능시험일",
+      "startDate": "2026-11-19",
+      "endDate": "2026-11-19",
+      "note": "",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "3eed9fecfa9e",
+      "category": "정시",
+      "title": "[정시](전문대)수능시험일",
+      "startDate": "2026-11-19",
+      "endDate": "2026-11-19",
+      "note": "",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "22c159a62cf8",
+      "category": "정시",
+      "title": "[정시]성적통지일",
+      "startDate": "2026-12-11",
+      "endDate": "2026-12-11",
+      "note": "",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "4c99852411f9",
+      "category": "정시",
+      "title": "[정시](전문대)성적통지일",
+      "startDate": "2026-12-11",
+      "endDate": "2026-12-11",
+      "note": "",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "0e2381bf74dc",
+      "category": "수시",
+      "title": "[수시]합격자발표",
+      "startDate": "2026-12-18",
+      "endDate": "2026-12-18",
+      "note": "",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "5e126c64cf33",
+      "category": "수시",
+      "title": "[수시](전문대)합격자발표",
+      "startDate": "2026-12-20",
+      "endDate": "2026-12-20",
+      "note": "",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "8be01049092f",
+      "category": "수시",
+      "title": "[수시]등록",
+      "startDate": "2026-12-21",
+      "endDate": "2026-12-23",
+      "note": "",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "b6f263bc0c18",
+      "category": "수시",
+      "title": "[수시](전문대)등록",
+      "startDate": "2026-12-21",
+      "endDate": "2026-12-23",
+      "note": "",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "4220cd7abd3d",
+      "category": "수시",
+      "title": "[수시]미등록충원합격통보마감일",
+      "startDate": "2026-12-29",
+      "endDate": "2026-12-29",
+      "note": "(합격자 발표 18시까지 ※ 홈페이지 발표는 14시까지, 14 ~ 18시까지는 개별 통보만 가능함)",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "ebaa68f54c6b",
+      "category": "수시",
+      "title": "[수시]미등록충원등록마감일",
+      "startDate": "2026-12-30",
+      "endDate": "2026-12-30",
+      "note": "(22시까지)",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "9888b022ab79",
+      "category": "수시",
+      "title": "[수시](전문대)모집충원합격통보마감일",
+      "startDate": "2026-12-31",
+      "endDate": "2026-12-31",
+      "note": "",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "807868f3ccb0",
+      "category": "수시",
+      "title": "[수시](전문대)미등록충원등록마감일",
+      "startDate": "2026-12-31",
+      "endDate": "2026-12-31",
+      "note": "",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "87efa35f4533",
+      "category": "정시",
+      "title": "[정시]원서접수",
+      "startDate": "2027-01-04",
+      "endDate": "2027-01-07",
+      "note": "(중 3일 이상)",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "ffbdfb9baefc",
+      "category": "정시",
+      "title": "[정시](전문대)1차원서접수",
+      "startDate": "2027-01-04",
+      "endDate": "2027-01-20",
+      "note": "",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "05c3d8fe0582",
+      "category": "정시",
+      "title": "[정시]가군모집",
+      "startDate": "2027-01-11",
+      "endDate": "2027-01-17",
+      "note": "",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "8f3ed9c5b5ae",
+      "category": "정시",
+      "title": "[정시]나군모집",
+      "startDate": "2027-01-18",
+      "endDate": "2027-01-24",
+      "note": "",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "5a6c1d060e61",
+      "category": "정시",
+      "title": "[정시](전문대)1차모집",
+      "startDate": "2027-01-21",
+      "endDate": "2027-02-08",
+      "note": "",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "5f55eeb658f7",
+      "category": "정시",
+      "title": "[정시]다군모집",
+      "startDate": "2027-01-25",
+      "endDate": "2027-01-31",
+      "note": "",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "d01b113dd6ac",
+      "category": "정시",
+      "title": "[정시]합격자발표",
+      "startDate": "2027-02-05",
+      "endDate": "2027-02-05",
+      "note": "",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "227a03b814b5",
+      "category": "정시",
+      "title": "[정시](전문대)1차합격자발료일",
+      "startDate": "2027-02-09",
+      "endDate": "2027-02-09",
+      "note": "",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "2e5e11e70660",
+      "category": "정시",
+      "title": "[정시](전문대)1차등록",
+      "startDate": "2027-02-10",
+      "endDate": "2027-02-10",
+      "note": "",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "a78612f6c200",
+      "category": "정시",
+      "title": "[정시]등록",
+      "startDate": "2027-02-10",
+      "endDate": "2027-02-12",
+      "note": "",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "cecc60d94225",
+      "category": "정시",
+      "title": "[정시]미등록충원합격통보마감일",
+      "startDate": "2027-02-17",
+      "endDate": "2027-02-17",
+      "note": "",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "6e380147bb89",
+      "category": "정시",
+      "title": "[정시]미등록충원등록마감일",
+      "startDate": "2027-02-18",
+      "endDate": "2027-02-18",
+      "note": "",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "b663faae761a",
+      "category": "정시",
+      "title": "[정시](전문대)1차미등록충원",
+      "startDate": "2027-02-18",
+      "endDate": "2027-02-27",
+      "note": "",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "5eec51b15581",
+      "category": "추가",
+      "title": "[추가]추가모집",
+      "startDate": "2027-02-19",
+      "endDate": "2027-02-26",
+      "note": "(※ 합격통보마감: 2027. 02. 26.(금) 18시까지 ※ 홈페이지 발표는 14시까지, 14 ~ 18시까지는 개별 통보만 가능함)",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "a267ec884551",
+      "category": "추가",
+      "title": "[추가]추가모집등록마감일",
+      "startDate": "2027-02-26",
+      "endDate": "2027-02-26",
+      "note": "(22시까지)",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    },
+    {
+      "id": "9def9147de69",
+      "category": "정시",
+      "title": "[정시](전문대)1차미등록충원합격통보마감일",
+      "startDate": "2027-02-27",
+      "endDate": "2027-02-27",
+      "note": "",
+      "firstSeenAt": "2026-07-16T04:39:52.916Z",
+      "lastChangedAt": "2026-07-16T04:39:52.916Z"
+    }
+  ]
+}
