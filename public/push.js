@@ -53,14 +53,18 @@ function renderOffsetChips() {
 function updatePushStatusUI() {
   const statusEl = document.getElementById('pushStatus');
   const btn = document.getElementById('pushSubscribeBtn');
+  const deniedHint = document.getElementById('pushDeniedHint');
+  deniedHint.style.display = 'none';
+  btn.disabled = false;
   if (!('Notification' in window) || !('serviceWorker' in navigator) || !('PushManager' in window)) {
     statusEl.textContent = '이 브라우저는 웹 푸시를 지원하지 않아요';
     btn.disabled = true;
     return;
   }
   if (Notification.permission === 'denied') {
-    statusEl.textContent = '알림이 차단되어 있어요 (브라우저 설정에서 허용 필요)';
-    btn.textContent = '알림 켜기';
+    statusEl.textContent = '알림이 차단되어 있어요';
+    btn.disabled = true;
+    deniedHint.style.display = '';
     return;
   }
   if (pushState.subscription) {
@@ -153,7 +157,7 @@ document.getElementById('pushSubscribeBtn').addEventListener('click', () => {
   renderOffsetChips();
   if ('serviceWorker' in navigator && 'PushManager' in window) {
     try {
-      const reg = await navigator.serviceWorker.getRegistration('./sw.js');
+      const reg = await navigator.serviceWorker.getRegistration();
       if (reg) pushState.subscription = await reg.pushManager.getSubscription();
     } catch (e) {}
   }
