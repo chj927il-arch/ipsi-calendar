@@ -46,6 +46,41 @@
       --glow: radial-gradient(900px 520px at 78% -10%, rgba(91,91,214,.10), transparent 60%);
     }
   }
+  /* 수동 테마 전환(themeToggleBtn)이 <html>에 stamp하는 data-theme — OS 설정(prefers-color-scheme)보다 항상 우선 */
+  :root[data-theme="dark"] {
+    --bg: #07080c; --bg-2: #0a0b11;
+    --glass: rgba(255,255,255,.035); --glass-strong: rgba(255,255,255,.055);
+    --hair: rgba(255,255,255,.08); --hair-strong: rgba(255,255,255,.14);
+    --text: #f3f5fb; --text-2: #b9c0d4; --muted: #767e96; --faint: #525a72;
+    --accent: #8b8cf9; --accent-2: #c084fc;
+    --accent-grad: linear-gradient(135deg,#7c7ef8,#c084fc);
+    --accent-soft: rgba(124,126,248,.14);
+    --amber: #fbbf24; --amber-soft: rgba(251,191,36,.15);
+    --emerald: #34d399; --emerald-soft: rgba(52,211,153,.15);
+    --rose: #fb7185; --rose-soft: rgba(251,113,133,.15);
+    --sky: #38bdf8; --sky-soft: rgba(56,189,248,.15);
+    --slate: #94a3b8; --slate-soft: rgba(148,163,184,.15);
+    --shadow: 0 24px 60px -18px rgba(0,0,0,.7);
+    --card-shadow: 0 1px 0 rgba(255,255,255,.04) inset, 0 18px 40px -22px rgba(0,0,0,.8);
+    --glow: radial-gradient(900px 520px at 75% -8%, rgba(124,126,248,.18), transparent 60%), radial-gradient(720px 440px at 8% 4%, rgba(192,132,252,.10), transparent 55%);
+  }
+  :root[data-theme="light"] {
+    --bg: #f4f5f9; --bg-2: #eef0f6;
+    --glass: rgba(255,255,255,.75); --glass-strong: #ffffff;
+    --hair: rgba(15,20,40,.09); --hair-strong: rgba(15,20,40,.16);
+    --text: #11142a; --text-2: #3a425e; --muted: #6b7488; --faint: #97a0b8;
+    --accent: #5b5bd6; --accent-2: #9333ea;
+    --accent-grad: linear-gradient(135deg,#5b5bd6,#9333ea);
+    --accent-soft: rgba(91,91,214,.10);
+    --amber: #c2740a; --amber-soft: rgba(194,116,10,.10);
+    --emerald: #047857; --emerald-soft: rgba(4,120,87,.10);
+    --rose: #e11d48; --rose-soft: rgba(225,29,72,.09);
+    --sky: #0369a1; --sky-soft: rgba(3,105,161,.10);
+    --slate: #475569; --slate-soft: rgba(71,85,105,.10);
+    --shadow: 0 24px 60px -22px rgba(20,30,70,.22);
+    --card-shadow: 0 1px 2px rgba(20,30,70,.05), 0 16px 36px -24px rgba(20,30,70,.22);
+    --glow: radial-gradient(900px 520px at 78% -10%, rgba(91,91,214,.10), transparent 60%);
+  }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { min-height: 100%; }
   body {
@@ -70,8 +105,8 @@
   .btn-primary { background: var(--accent-grad); border-color: transparent; color: #fff; box-shadow: 0 10px 24px -10px var(--accent); }
   .btn-primary:hover { color: #fff; filter: brightness(1.08); }
 
-  .grid { display: grid; grid-template-columns: 1fr 340px; gap: 22px; align-items: start; }
-  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+  .grid { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 22px; align-items: start; }
+  @media (max-width: 900px) { .grid { grid-template-columns: minmax(0, 1fr); } }
 
   .card { background: linear-gradient(180deg, var(--glass-strong), var(--glass)); border: 1px solid var(--hair); border-radius: var(--radius); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: var(--card-shadow); padding: 22px; }
   .card + .card { margin-top: 18px; }
@@ -82,7 +117,7 @@
   .icon-btn { width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--hair-strong); background: var(--glass); color: var(--text-2); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; font-size: 16px; }
   .icon-btn:hover { color: var(--text); border-color: var(--accent); }
 
-  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
   .cal-dow { text-align: center; font-size: 11.5px; font-weight: 700; color: var(--faint); letter-spacing: .04em; padding-bottom: 8px; }
   .cal-cell { min-height: 84px; border-radius: var(--radius-xs); border: 1px solid transparent; padding: 7px 6px; cursor: pointer; transition: all .14s; display: flex; flex-direction: column; gap: 4px; }
   .cal-cell:hover { background: var(--glass-strong); border-color: var(--hair); }
@@ -145,6 +180,7 @@
       <div class="brand-sub" id="updatedAt">대학어디가(adiga.kr) 대입일정을 자동으로 모아 보여줍니다.</div>
     </div>
     <div class="top-actions">
+      <button class="icon-btn" id="themeToggleBtn" title="테마 전환">🌙</button>
       <button class="btn" id="refreshBtn" style="display:none">지금 새로고침</button>
       <button class="btn btn-primary" id="notifyToggleBtn">🔔 알림 설정</button>
     </div>
@@ -397,6 +433,31 @@ refreshBtn.addEventListener('click', async () => {
   }
   setTimeout(() => { refreshBtn.disabled = false; refreshBtn.textContent = '지금 새로고침'; }, 2000);
 });
+
+function getEffectiveTheme() {
+  const explicit = document.documentElement.getAttribute('data-theme');
+  if (explicit) return explicit;
+  return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+}
+function updateThemeBtn() {
+  const btn = document.getElementById('themeToggleBtn');
+  const eff = getEffectiveTheme();
+  btn.textContent = eff === 'dark' ? '☀️' : '🌙';
+  btn.title = eff === 'dark' ? '라이트 모드로 전환' : '다크 모드로 전환';
+}
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('ipsi_theme', theme);
+  updateThemeBtn();
+}
+document.getElementById('themeToggleBtn').addEventListener('click', () => {
+  applyTheme(getEffectiveTheme() === 'dark' ? 'light' : 'dark');
+});
+(function initTheme() {
+  const saved = localStorage.getItem('ipsi_theme');
+  if (saved === 'light' || saved === 'dark') document.documentElement.setAttribute('data-theme', saved);
+  updateThemeBtn();
+})();
 
 (async () => {
   await loadSchedule();
