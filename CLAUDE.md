@@ -34,8 +34,13 @@
 - `lib/diff.js` — 이전 스냅샷과 비교해 신규/변경/삭제 감지, `firstSeenAt`/`lastChangedAt` 유지.
 - `crawl.js` — 크롤 1회 실행 진입점(Actions가 매일 호출). `public/data/schedule.json` 갱신.
 - `server.js` — 로컬 테스트용 Express 서버(정적 서빙 + `/api/run` 수동 크롤).
-- `public/index.html` — 캘린더 대시보드(다크모드, Pretendard, 글래스모피즘). `./data/schedule.json`
-  을 정적으로 읽음(DB 없음).
+- `public/index.html` — 캘린더 대시보드(다크모드 기본 + 라이트 모드 수동 전환, Pretendard,
+  글래스모피즘). `./data/schedule.json`을 정적으로 읽음(DB 없음). 우측 상단 🌙/☀️ 버튼으로 테마
+  전환(`data-theme` 속성 + localStorage `ipsi_theme`, OS 설정보다 우선).
+  **사용자 커스텀 일정**: 날짜 셀 hover 시 `+` 버튼, 또는 "해당일 일정" 패널의 "+ 일정 추가"로
+  등록 팝업(일정명/메모/색상 8종)을 띄움 → `localStorage`(`ipsi_custom_events`)에 브라우저별로만
+  저장(서버 미동기화, 여러 기기 간 공유 안 됨). 편집/삭제는 해당일 상세의 ✎ 버튼. 크롤링된
+  대입일정과 합쳐서 캘린더/해당일 상세/다가오는 일정 모두에 표시됨(`allEvents()`).
 - `public/push.js` — 웹 푸시 구독 UI 로직(권한 요청 → 서비스워커 등록 → `PushManager.subscribe`
   → `/api/push/subscribe`로 서버에 저장).
 - `public/sw.js` — 서비스워커(푸시 수신/표시, 알림 클릭 시 포커스).
