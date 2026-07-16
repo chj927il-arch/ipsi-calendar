@@ -1,6 +1,7 @@
-name: 입시일정 갱신 + 알림 발송 (수동 실행)
+name: 입시일정 크롤링 + 배포 (수동 실행)
 
-# 자동 매일 크론은 사용하지 않음 — 필요할 때 Actions 탭에서 수동으로(workflow_dispatch) 실행
+# 자동 매일 크론은 사용하지 않음 — 사이트 원본이 갱신됐을 때 Actions 탭에서 수동으로(workflow_dispatch) 실행
+# 알림 발송은 별도로 notify.yml이 매일 자동 실행
 on:
   workflow_dispatch: {}
 
@@ -8,7 +9,7 @@ permissions:
   contents: write   # 크롤링 결과(public/data)를 저장소에 다시 커밋하기 위해 필요
 
 jobs:
-  crawl-and-notify:
+  crawl:
     runs-on: ubuntu-latest
     steps:
       - name: 코드 체크아웃
@@ -25,24 +26,15 @@ jobs:
       - name: 대학어디가 대입일정 크롤링
         run: node crawl.js
 
-      - name: 다가오는 일정 푸시 알림 발송
-        env:
-          WORKER_BASE_URL: ${{ secrets.WORKER_BASE_URL }}
-          NOTIFY_API_KEY: ${{ secrets.NOTIFY_API_KEY }}
-          VAPID_PUBLIC_KEY: ${{ secrets.VAPID_PUBLIC_KEY }}
-          VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
-          VAPID_SUBJECT: ${{ secrets.VAPID_SUBJECT }}
-        run: node scripts/notify.js
-
       - name: 결과를 저장소에 커밋
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add public/data
+          git add public/data/schedule.json
           if git diff --cached --quiet; then
             echo "변경된 데이터 없음 — 커밋 생략"
           else
-            git commit -m "일정/알림 데이터 자동 갱신 ($(date -u +%Y-%m-%dT%H:%MZ))"
+            git commit -m "일정 데이터 갱신 ($(date -u +%Y-%m-%dT%H:%MZ))"
             git push
           fi
 

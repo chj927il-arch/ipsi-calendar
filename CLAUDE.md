@@ -47,14 +47,18 @@
 - `worker.js` + `wrangler.toml` — Cloudflare Worker: 정적 자산 서빙 + 푸시 구독 API
   (`/api/push/subscribe`, `/api/push/unsubscribe`, `/api/push/subscriptions`[보호],
   `/api/push/prune`[보호]). 구독 저장은 Cloudflare **KV**(`SUBSCRIPTIONS` 바인딩).
-- `scripts/notify.js` — 매일 실행: `schedule.json`의 일정 D-day와 구독자 알림 선호(D-7/3/1/0)를
-  비교해 `web-push` npm으로 발송. **발송 로직은 Cloudflare Worker가 아니라 GitHub Actions(Node
-  런타임)에서 수행** — Workers 런타임에서 VAPID 암호화를 직접 구현하는 리스크를 피하기 위함.
-  발송 여부는 `public/data/push-log.json`에 기록해 중복 발송 방지.
+- `scripts/notify.js` — `schedule.json`의 일정 D-day와 구독자 알림 선호(D-7/3/1/0)를 비교해
+  `web-push` npm으로 발송. **발송 로직은 Cloudflare Worker가 아니라 GitHub Actions(Node 런타임)
+  에서 수행** — Workers 런타임에서 VAPID 암호화를 직접 구현하는 리스크를 피하기 위함. 발송 여부는
+  `public/data/push-log.json`에 기록해 중복 발송 방지.
 - `scripts/generate-vapid-keys.js` — VAPID 키 최초 1회 생성(`public/data/push-config.json`에
   공개키 자동 저장, 비밀키는 GitHub Secrets에 수동 등록 필요).
 - `.github/workflows/daily.yml` — **수동 실행 전용**(workflow_dispatch만, 자동 크론 없음):
-  크롤 → 알림 발송 → `public/data/*.json` 커밋 → Cloudflare 재배포.
+  크롤 → `schedule.json` 커밋 → Cloudflare 재배포. 원본 사이트가 바뀐 걸 확인했을 때만 실행.
+- `.github/workflows/notify.yml` — **매일 자동 실행**(크론 있음, 크롤은 안 함): 이미 저장된
+  `schedule.json` 기준으로 오늘이 D-day인 구독자에게만 발송 → `push-log.json` 커밋. 알림 기능이
+  실제로 동작하려면 이 워크플로우의 자동 스케줄이 반드시 살아있어야 함(크롤과 분리돼 있음에 주의 —
+  크롤을 수동으로 바꿔도 이 알림 자동화는 별개로 계속 돌아야 함).
 
 ## 데이터 스키마 (public/data/schedule.json)
 ```json
