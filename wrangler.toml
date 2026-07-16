@@ -2,6 +2,7 @@
 name = "ipsi-calendar"
 main = "worker.js"
 compatibility_date = "2024-12-01"
+account_id = "366520a4b0fdd3d18601166b6bd0e152"
 
 [assets]
 directory = "./public"

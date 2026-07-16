@@ -48,3 +48,9 @@ jobs:
             git commit -m "일정/알림 데이터 자동 갱신 ($(date -u +%Y-%m-%dT%H:%MZ))"
             git push
           fi
+
+      - name: Cloudflare Worker에 최신 데이터 재배포
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          command: deploy
